@@ -1,217 +1,276 @@
 /* ============================================================
    demo-TN — HTML to 4D Form Converter
-   Cross-platform stylesheet (styleSheets.css)
-   Properties use 4D names as defined in formsSchema.json
+   Sophisticated dark-sidebar design
    ============================================================ */
 
 /* ----------------------------------------------------------
-   Header bar
+   Title bar
 ---------------------------------------------------------- */
-.header {
-    fill: #2C3E50;
+.titleBar {
+    fill: #0F172A;
     stroke: transparent;
     borderStyle: none;
 }
 
-.headerTitle {
+.titleText {
     fill: transparent;
-    stroke: #FFFFFF;
+    stroke: #E2E8F0;
     borderStyle: none;
-    fontSize: 18;
+    fontSize: 13;
     fontWeight: bold;
 }
 
-.headerSubtitle {
-    fill: transparent;
-    stroke: #95A5A6;
+.appIcon {
+    fill: #3B82F6;
+    stroke: transparent;
     borderStyle: none;
-    fontSize: 11;
+    borderRadius: 4;
 }
+
+.badgeBg {
+    fill: #1E293B;
+    stroke: #334155;
+    borderStyle: solid;
+    borderRadius: 11;
+}
+
+.badgeText {
+    fill: transparent;
+    stroke: #64748B;
+    borderStyle: none;
+    fontSize: 10;
+}
+
+/* Traffic lights */
+#tl1 { fill: #FF5F57; stroke: transparent; borderStyle: none; borderRadius: 6; }
+#tl2 { fill: #FEBC2E; stroke: transparent; borderStyle: none; borderRadius: 6; }
+#tl3 { fill: #28C840; stroke: transparent; borderStyle: none; borderRadius: 6; }
 
 /* ----------------------------------------------------------
-   Labels
+   Sidebar
 ---------------------------------------------------------- */
-.formLabel {
-    fill: transparent;
-    stroke: #2C3E50;
+.sidebarBg {
+    fill: #FAFBFC;
+    stroke: transparent;
     borderStyle: none;
-    fontSize: 12;
+}
+
+.vDivider {
+    fill: #E2E8F0;
+    stroke: transparent;
+    borderStyle: none;
+}
+
+.hDivider {
+    fill: #E2E8F0;
+    stroke: transparent;
+    borderStyle: none;
+}
+
+.sectionLabel {
+    fill: transparent;
+    stroke: #94A3B8;
+    borderStyle: none;
+    fontSize: 10;
     fontWeight: bold;
+}
+
+.fieldLabel {
+    fill: transparent;
+    stroke: #475569;
+    borderStyle: none;
+    fontSize: 11;
+    fontWeight: bold;
+}
+
+.fileHint {
+    fill: transparent;
+    stroke: #94A3B8;
+    borderStyle: none;
+    fontSize: 10;
 }
 
 /* ----------------------------------------------------------
    Input fields
 ---------------------------------------------------------- */
-.inputField {
-    borderStyle: solid;
-    fontSize: 12;
-    borderRadius: 4;
-}
-
-.inputReadOnly {
-    borderStyle: solid;
-    fill: #F4F6F7;
-    stroke: #7F8C8D;
-    fontSize: 12;
-    borderRadius: 4;
-}
-
-.logArea {
-    borderStyle: solid;
+.monoInput {
     fill: #FFFFFF;
+    stroke: #CBD5E1;
+    borderStyle: solid;
+    borderRadius: 6;
     fontSize: 11;
-    borderRadius: 4;
+    fontFamily: Menlo;
+}
+
+.stdInput {
+    fill: #FFFFFF;
+    stroke: #CBD5E1;
+    borderStyle: solid;
+    borderRadius: 6;
+    fontSize: 12;
+}
+
+.logOutput {
+    fill: #FFFFFF;
+    stroke: transparent;
+    borderStyle: none;
+    fontSize: 10;
+    fontFamily: Menlo;
 }
 
 /* ----------------------------------------------------------
    Buttons
 ---------------------------------------------------------- */
-.primaryBtn {
-    fontSize: 14;
-    fontWeight: bold;
-}
-
-.secondaryBtn {
+.browseBtn {
     fontSize: 12;
-}
-
-/* ----------------------------------------------------------
-   Panels & layout
----------------------------------------------------------- */
-.panelCard {
-    fill: #F8F9FA;
-    stroke: #DEE2E6;
     borderStyle: solid;
     borderRadius: 6;
 }
 
-.divider {
-    fill: #E0E0E0;
+.convertBtn {
+    fontSize: 13;
+    fontWeight: bold;
+    borderStyle: none;
+    borderRadius: 8;
+}
+
+#btnConvert {
+    background-color: #2563EB;
+    color: #FFFFFF;
+    borderStyle: none;
+    borderRadius: 8;
+}
+
+/* ----------------------------------------------------------
+   Preview panel
+---------------------------------------------------------- */
+.previewHeaderBg {
+    fill: #FAFBFC;
     stroke: transparent;
     borderStyle: none;
 }
 
-.statusBar {
-    fill: #ECF0F1;
-    stroke: #BDC3C7;
-    borderStyle: solid;
+.previewHDivider {
+    fill: #E2E8F0;
+    stroke: transparent;
+    borderStyle: none;
 }
 
-.statusText {
+.tabActive {
     fill: transparent;
-    stroke: #555555;
+    stroke: #2563EB;
+    borderStyle: none;
+    fontSize: 12;
+    fontWeight: bold;
+}
+
+.tabInactive {
+    fill: transparent;
+    stroke: #94A3B8;
+    borderStyle: none;
+    fontSize: 12;
+}
+
+#rectTabIndicator {
+    fill: #2563EB;
+    stroke: transparent;
+    borderStyle: none;
+}
+
+.urlBadge {
+    fill: #E2E8F0;
+    stroke: transparent;
+    borderStyle: none;
+    fontSize: 10;
+    fontFamily: Menlo;
+    borderRadius: 4;
+}
+
+.jsonOutput {
+    fill: #FAFBFC;
+    stroke: transparent;
     borderStyle: none;
     fontSize: 11;
+    fontFamily: Menlo;
 }
 
 /* ----------------------------------------------------------
-   Dark mode overrides
+   Status bar
+---------------------------------------------------------- */
+.darkBar {
+    fill: #0F172A;
+    stroke: transparent;
+    borderStyle: none;
+}
+
+.statusDot {
+    fill: #4ADE80;
+    stroke: transparent;
+    borderStyle: none;
+    borderRadius: 3;
+}
+
+.statusGreen {
+    fill: transparent;
+    stroke: #4ADE80;
+    borderStyle: none;
+    fontSize: 10;
+    fontWeight: bold;
+}
+
+.statusDim {
+    fill: transparent;
+    stroke: #475569;
+    borderStyle: none;
+    fontSize: 10;
+}
+
+.statusSep {
+    fill: #1E293B;
+    stroke: transparent;
+    borderStyle: none;
+}
+
+/* ----------------------------------------------------------
+   Dark mode
 ---------------------------------------------------------- */
 @media (prefers-color-scheme: dark) {
 
-    .header {
-        fill: #1a2332;
-    }
+    .sidebarBg    { fill: #0F172A; }
+    .vDivider     { fill: #1E293B; }
+    .hDivider     { fill: #1E293B; }
+    .previewHeaderBg { fill: #0F172A; }
+    .previewHDivider { fill: #1E293B; }
 
-    .headerTitle {
-        stroke: #ECF0F1;
-    }
+    .sectionLabel { stroke: #475569; }
+    .fieldLabel   { stroke: #94A3B8; }
+    .fileHint     { stroke: #475569; }
+    .titleText    { stroke: #F1F5F9; }
+    .badgeBg      { fill: #0F172A; stroke: #1E293B; }
 
-    .headerSubtitle {
-        stroke: #7F8C8D;
-    }
+    .monoInput    { fill: #1E293B; stroke: #334155; }
+    .stdInput     { fill: #1E293B; stroke: #334155; }
+    .logOutput    { fill: #0F172A; }
+    .jsonOutput   { fill: #0F172A; }
+    .urlBadge     { fill: #1E293B; stroke: #334155; }
 
-    .formLabel {
-        stroke: #ECF0F1;
-    }
-
-    .inputField {
-        fill: #1e2d3d;
-        stroke: #4a6f8a;
-    }
-
-    .inputReadOnly {
-        fill: #253545;
-        stroke: #4a6f8a;
-    }
-
-    .logArea {
-        fill: #1e2d3d;
-        stroke: #334155;
-    }
-
-    .panelCard {
-        fill: #1e2d3d;
-        stroke: #334155;
-    }
-
-    .divider {
-        fill: #334155;
-    }
-
-    .statusBar {
-        fill: #1a2332;
-        stroke: #2a3f4f;
-    }
-
-    .statusText {
-        stroke: #BDC3C7;
-    }
+    .tabInactive  { stroke: #475569; }
 }
 
 /* ----------------------------------------------------------
-   Liquid Glass theme overrides (macOS 26+)
+   Liquid Glass overrides
 ---------------------------------------------------------- */
 @media (form-theme: liquid-glass) and (prefers-color-scheme: light) {
-
-    .header {
-        fill: #1C2B3A;
-    }
-
-    .panelCard {
-        fill: #F0F4F8;
-        stroke: #D1D9E0;
-    }
-
-    .inputField {
-        fill: #FFFFFF;
-        stroke: #C8D0D8;
-    }
-
-    .inputReadOnly {
-        fill: #EEF2F5;
-        stroke: #C8D0D8;
-    }
-
-    .statusBar {
-        fill: #E8EDF2;
-        stroke: #C8D0D8;
-    }
+    .sidebarBg    { fill: #F0F4F8; }
+    .stdInput     { fill: #FFFFFF; stroke: #C8D0D8; }
+    .monoInput    { fill: #FFFFFF; stroke: #C8D0D8; }
+    .previewHeaderBg { fill: #F0F4F8; }
 }
 
 @media (form-theme: liquid-glass) and (prefers-color-scheme: dark) {
-
-    .header {
-        fill: #111D28;
-    }
-
-    .panelCard {
-        fill: #1a2a3a;
-        stroke: #2a3f55;
-    }
-
-    .inputField {
-        fill: #162030;
-        stroke: #2a3f55;
-    }
-
-    .logArea {
-        fill: #162030;
-        stroke: #2a3f55;
-    }
-
-    .statusBar {
-        fill: #111D28;
-        stroke: #1e3045;
-    }
+    .sidebarBg    { fill: #111827; }
+    .stdInput     { fill: #1F2937; stroke: #374151; }
+    .monoInput    { fill: #1F2937; stroke: #374151; }
+    .logOutput    { fill: #111827; }
+    .previewHeaderBg { fill: #111827; }
 }

@@ -1,18 +1,26 @@
 property htmlPath : Text
+property htmlHint : Text
 property formName : Text
 property apiKey : Text
 property logText : Text
 property previewUrl : Text
 property statusText : Text
+property tokenText : Text
+property versionText : Text
+property generatedJson : Text
 property actions : Object
 
 Class constructor()
 	This.htmlPath:=""
+	This.htmlHint:="No file selected"
 	This.formName:=""
 	This.apiKey:=""
 	This.logText:=""
 	This.previewUrl:="about:blank"
-	This.statusText:="Ready — select an HTML file to begin."
+	This.statusText:="Ready — select an HTML file to begin"
+	This.tokenText:=""
+	This.versionText:="4D v21 · Project Mode"
+	This.generatedJson:=""
 	This.actions:={converting: {running: 0}}
 
 //MARK: - Form & form objects event handlers
@@ -21,6 +29,7 @@ Function formEventHandler($formEventCode : Integer)
 	Case of
 		: ($formEventCode=On Load)
 			OBJECT SET VISIBLE(*; "spinnerConvert"; False)
+			OBJECT SET VISIBLE(*; "areaJsonOutput"; False)
 	End case
 
 Function btnBrowseEventHandler($formEventCode : Integer)
@@ -29,9 +38,11 @@ Function btnBrowseEventHandler($formEventCode : Integer)
 			var $docName : Text:=Select document(""; ""; "Select an HTML file"; 0)
 			If (OK=1)
 				This.htmlPath:=Document
-				This.previewUrl:="file://"+This.htmlPath
-				This.statusText:="File selected: "+This.htmlPath
-				This.log("HTML file loaded: "+This.htmlPath)
+				var $file : 4D.File:=File(Document; fk platform path)
+				This.htmlHint:=$file.name+" · "+String(Round($file.size/1024; 1))+" KB"
+				This.previewUrl:="file://"+Document
+				This.statusText:="File selected: "+$file.name
+				This.log("File loaded: "+$file.name)
 			End if
 	End case
 
@@ -55,7 +66,9 @@ Function btnConvertEventHandler($formEventCode : Integer)
 			OBJECT SET VISIBLE(*; "spinnerConvert"; True)
 			OBJECT SET TITLE(*; "btnConvert"; "Converting…")
 			This.statusText:="Calling OpenAI API…"
-			This.log("Starting conversion → form name: "+This.formName)
+			This.tokenText:=""
+			This.log("Starting → "+This.formName)
+			This.log("Calling OpenAI API…")
 
 			var $result : Object:=ConvertHTMLTo4DForm(This.htmlPath; This.formName; This.apiKey)
 
@@ -64,20 +77,44 @@ Function btnConvertEventHandler($formEventCode : Integer)
 			OBJECT SET TITLE(*; "btnConvert"; "Convert →")
 
 			If ($result.success)
-				This.statusText:="✓ Form created at: "+$result.outputPath
-				This.log("Success! Written to: "+$result.outputPath)
-				ALERT("Form generated successfully!\n\nPath: "+$result.outputPath)
+				This.generatedJson:=$result.json
+				If ($result.tokenCount>0)
+					This.tokenText:="gpt-4o · "+String($result.tokenCount)+" tokens"
+				End if
+				This.statusText:="✓ form.4dform written"
+				This.log("✓ Written to Sources/Forms/"+This.formName+"/")
 			Else
-				This.statusText:="✗ Conversion failed"
-				This.log("Error: "+$result.error)
+				This.statusText:="✗ "+$result.error
+				This.log("✗ "+$result.error)
 				ALERT("Conversion failed:\n"+$result.error)
 			End if
+	End case
+
+Function tabPreviewEventHandler($formEventCode : Integer)
+	Case of
+		: ($formEventCode=On Clicked)
+			OBJECT SET VISIBLE(*; "webPreview"; True)
+			OBJECT SET VISIBLE(*; "areaJsonOutput"; False)
+			OBJECT SET RGB COLORS(*; "btnTabPreview"; 0x2563EB; -1; -1)
+			OBJECT SET RGB COLORS(*; "btnTabJson"; 0x94A3B8; -1; -1)
+			OBJECT SET VISIBLE(*; "rectTabIndicator"; True)
+	End case
+
+Function tabJsonEventHandler($formEventCode : Integer)
+	Case of
+		: ($formEventCode=On Clicked)
+			OBJECT SET VISIBLE(*; "webPreview"; False)
+			OBJECT SET VISIBLE(*; "areaJsonOutput"; True)
+			OBJECT SET RGB COLORS(*; "btnTabJson"; 0x2563EB; -1; -1)
+			OBJECT SET RGB COLORS(*; "btnTabPreview"; 0x94A3B8; -1; -1)
+			OBJECT SET VISIBLE(*; "rectTabIndicator"; False)
 	End case
 
 //MARK: - Helpers
 
 Function log($message : Text)
+	var $ts : Text:=String(Current time; HH_MM_SS)
 	If (This.logText#"")
 		This.logText:=This.logText+Char(13)
 	End if
-	This.logText:=This.logText+"["+String(Current time; HH_MM_SS)+"] "+$message
+	This.logText:=This.logText+$ts+"  "+$message

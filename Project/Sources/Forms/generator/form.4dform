@@ -3,12 +3,12 @@
 		"version": "1",
 		"kind": "form"
 	},
-	"windowSizingX": "variable",
-	"windowSizingY": "variable",
-	"windowMinWidth": 0,
-	"windowMinHeight": 0,
-	"windowMaxWidth": 32767,
-	"windowMaxHeight": 32767,
+	"windowSizingX": "fixed",
+	"windowSizingY": "fixed",
+	"windowMinWidth": 960,
+	"windowMinHeight": 620,
+	"windowMaxWidth": 960,
+	"windowMaxHeight": 620,
 	"rightMargin": 20,
 	"bottomMargin": 20,
 	"events": ["onLoad", "onClick"],
@@ -21,189 +21,395 @@
 		},
 		{
 			"objects": {
-				"rectHeader": {
+
+				"rectTitleBar": {
 					"type": "rectangle",
-					"class": "header",
+					"class": "titleBar",
 					"left": 0,
 					"top": 0,
-					"width": 820,
-					"height": 56
+					"width": 960,
+					"height": 48
 				},
-				"txtTitle": {
+				"tl1": {
+					"type": "rectangle",
+					"left": 16,
+					"top": 18,
+					"width": 12,
+					"height": 12
+				},
+				"tl2": {
+					"type": "rectangle",
+					"left": 35,
+					"top": 18,
+					"width": 12,
+					"height": 12
+				},
+				"tl3": {
+					"type": "rectangle",
+					"left": 54,
+					"top": 18,
+					"width": 12,
+					"height": 12
+				},
+				"rectAppIcon": {
+					"type": "rectangle",
+					"class": "appIcon",
+					"left": 367,
+					"top": 15,
+					"width": 18,
+					"height": 18
+				},
+				"txtAppTitle": {
 					"type": "text",
-					"class": "headerTitle",
-					"left": 20,
+					"class": "titleText",
+					"left": 392,
 					"top": 14,
-					"width": 620,
-					"height": 28,
+					"width": 220,
+					"height": 22,
 					"text": "HTML → 4D Form Converter"
 				},
-				"txtSubtitle": {
-					"type": "text",
-					"class": "headerSubtitle",
-					"left": 650,
-					"top": 20,
-					"width": 150,
-					"height": 18,
-					"text": "Powered by 4D AIKit"
+				"rectBadge": {
+					"type": "rectangle",
+					"class": "badgeBg",
+					"left": 824,
+					"top": 13,
+					"width": 120,
+					"height": 22
 				},
-				"lblHtmlFile": {
+				"txtBadge": {
 					"type": "text",
-					"class": "formLabel",
-					"left": 20,
-					"top": 76,
-					"width": 80,
-					"height": 20,
-					"text": "HTML File:"
+					"class": "badgeText",
+					"left": 828,
+					"top": 16,
+					"width": 112,
+					"height": 16,
+					"text": "4D AIKit · gpt-4o",
+					"textAlign": "center"
+				},
+
+				"rectSidebar": {
+					"type": "rectangle",
+					"class": "sidebarBg",
+					"left": 0,
+					"top": 48,
+					"width": 264,
+					"height": 548
+				},
+
+				"txtSection1": {
+					"type": "text",
+					"class": "sectionLabel",
+					"left": 8,
+					"top": 63,
+					"width": 248,
+					"height": 14,
+					"text": "SOURCE FILE"
 				},
 				"inputHtmlPath": {
 					"type": "input",
-					"class": "inputReadOnly",
-					"left": 108,
-					"top": 72,
-					"width": 586,
-					"height": 26,
+					"class": "monoInput",
+					"left": 8,
+					"top": 82,
+					"width": 182,
+					"height": 28,
 					"dataSource": "Form.htmlPath",
-					"enterable": false
+					"enterable": false,
+					"placeholder": "No file selected…"
 				},
 				"btnBrowse": {
 					"type": "button",
-					"class": "secondaryBtn",
-					"left": 704,
-					"top": 72,
-					"width": 96,
-					"height": 26,
-					"text": "Browse…",
+					"class": "browseBtn",
+					"left": 196,
+					"top": 82,
+					"width": 60,
+					"height": 28,
+					"text": "Browse",
 					"method": "ObjectMethods/btnBrowse.4dm",
 					"events": ["onClick"]
 				},
-				"rectDivider": {
+				"txtFileHint": {
+					"type": "text",
+					"class": "fileHint",
+					"left": 8,
+					"top": 116,
+					"width": 248,
+					"height": 14,
+					"dataSource": "Form.htmlHint"
+				},
+				"hDivider1": {
 					"type": "rectangle",
-					"class": "divider",
-					"left": 20,
-					"top": 112,
-					"width": 780,
+					"class": "hDivider",
+					"left": 0,
+					"top": 138,
+					"width": 264,
 					"height": 1
 				},
-				"lblPreview": {
+
+				"txtSection2": {
 					"type": "text",
-					"class": "formLabel",
-					"left": 20,
-					"top": 120,
-					"width": 100,
-					"height": 18,
-					"text": "Live Preview"
+					"class": "sectionLabel",
+					"left": 8,
+					"top": 151,
+					"width": 248,
+					"height": 14,
+					"text": "OUTPUT"
 				},
-				"webPreview": {
-					"type": "webArea",
-					"left": 20,
-					"top": 142,
-					"width": 460,
-					"height": 340,
-					"dataSource": "Form.previewUrl"
-				},
-				"rectRightPanel": {
-					"type": "rectangle",
-					"class": "panelCard",
-					"left": 494,
-					"top": 114,
-					"width": 308,
-					"height": 370
-				},
-				"lblFormName": {
+				"txtLabelFormName": {
 					"type": "text",
-					"class": "formLabel",
-					"left": 510,
-					"top": 126,
-					"width": 276,
-					"height": 18,
-					"text": "Output Form Name"
+					"class": "fieldLabel",
+					"left": 8,
+					"top": 173,
+					"width": 248,
+					"height": 14,
+					"text": "Form Name"
 				},
 				"inputFormName": {
 					"type": "input",
-					"class": "inputField",
-					"left": 510,
-					"top": 148,
-					"width": 276,
-					"height": 26,
-					"dataSource": "Form.formName"
+					"class": "stdInput",
+					"left": 8,
+					"top": 191,
+					"width": 248,
+					"height": 28,
+					"dataSource": "Form.formName",
+					"placeholder": "myForm"
 				},
-				"lblApiKey": {
+				"hDivider2": {
+					"type": "rectangle",
+					"class": "hDivider",
+					"left": 0,
+					"top": 227,
+					"width": 264,
+					"height": 1
+				},
+
+				"txtSection3": {
 					"type": "text",
-					"class": "formLabel",
-					"left": 510,
-					"top": 190,
-					"width": 276,
-					"height": 18,
-					"text": "OpenAI API Key"
+					"class": "sectionLabel",
+					"left": 8,
+					"top": 240,
+					"width": 248,
+					"height": 14,
+					"text": "OPENAI"
+				},
+				"txtLabelApiKey": {
+					"type": "text",
+					"class": "fieldLabel",
+					"left": 8,
+					"top": 262,
+					"width": 248,
+					"height": 14,
+					"text": "API Key"
 				},
 				"inputApiKey": {
 					"type": "input",
-					"class": "inputField",
-					"left": 510,
-					"top": 212,
-					"width": 276,
-					"height": 26,
-					"dataSource": "Form.apiKey"
+					"class": "monoInput",
+					"left": 8,
+					"top": 280,
+					"width": 248,
+					"height": 28,
+					"dataSource": "Form.apiKey",
+					"placeholder": "sk-proj-…"
 				},
 				"btnConvert": {
 					"type": "button",
-					"class": "primaryBtn",
-					"left": 510,
-					"top": 256,
-					"width": 276,
-					"height": 40,
+					"class": "convertBtn",
+					"left": 8,
+					"top": 318,
+					"width": 248,
+					"height": 36,
 					"text": "Convert →",
 					"method": "ObjectMethods/btnConvert.4dm",
 					"events": ["onClick"]
 				},
 				"spinnerConvert": {
 					"type": "spinner",
-					"left": 728,
-					"top": 262,
-					"width": 28,
-					"height": 28,
+					"left": 218,
+					"top": 323,
+					"width": 26,
+					"height": 26,
 					"dataSource": "Form.actions.converting.running",
 					"visibility": "hidden"
 				},
-				"lblLog": {
+				"hDivider3": {
+					"type": "rectangle",
+					"class": "hDivider",
+					"left": 0,
+					"top": 366,
+					"width": 264,
+					"height": 1
+				},
+
+				"txtSection4": {
 					"type": "text",
-					"class": "formLabel",
-					"left": 510,
-					"top": 314,
-					"width": 276,
-					"height": 18,
-					"text": "Log"
+					"class": "sectionLabel",
+					"left": 8,
+					"top": 379,
+					"width": 248,
+					"height": 14,
+					"text": "LOG"
 				},
 				"areaLog": {
 					"type": "input",
-					"class": "logArea",
-					"left": 510,
-					"top": 336,
-					"width": 276,
-					"height": 140,
+					"class": "logOutput",
+					"left": 8,
+					"top": 399,
+					"width": 248,
+					"height": 189,
 					"dataSource": "Form.logText",
 					"enterable": false,
 					"multiline": "yes",
 					"scrollbarVertical": "visible"
 				},
+
+				"rectVDivider": {
+					"type": "rectangle",
+					"class": "vDivider",
+					"left": 264,
+					"top": 48,
+					"width": 1,
+					"height": 548
+				},
+
+				"rectPreviewHeader": {
+					"type": "rectangle",
+					"class": "previewHeaderBg",
+					"left": 265,
+					"top": 48,
+					"width": 695,
+					"height": 38
+				},
+				"btnTabPreview": {
+					"type": "button",
+					"class": "tabActive",
+					"left": 281,
+					"top": 60,
+					"width": 80,
+					"height": 18,
+					"text": "Live Preview",
+					"style": "flat",
+					"method": "ObjectMethods/tabPreview.4dm",
+					"events": ["onClick"]
+				},
+				"rectTabIndicator": {
+					"type": "rectangle",
+					"left": 281,
+					"top": 84,
+					"width": 80,
+					"height": 2
+				},
+				"btnTabJson": {
+					"type": "button",
+					"class": "tabInactive",
+					"left": 369,
+					"top": 60,
+					"width": 80,
+					"height": 18,
+					"text": "Output JSON",
+					"style": "flat",
+					"method": "ObjectMethods/tabJson.4dm",
+					"events": ["onClick"]
+				},
+				"txtPreviewUrl": {
+					"type": "text",
+					"class": "urlBadge",
+					"left": 700,
+					"top": 59,
+					"width": 250,
+					"height": 18,
+					"dataSource": "Form.previewUrl",
+					"textAlign": "right"
+				},
+				"rectPreviewDivider": {
+					"type": "rectangle",
+					"class": "previewHDivider",
+					"left": 265,
+					"top": 86,
+					"width": 695,
+					"height": 1
+				},
+
+				"webPreview": {
+					"type": "webArea",
+					"left": 265,
+					"top": 87,
+					"width": 695,
+					"height": 509,
+					"dataSource": "Form.previewUrl"
+				},
+				"areaJsonOutput": {
+					"type": "input",
+					"class": "jsonOutput",
+					"left": 265,
+					"top": 87,
+					"width": 695,
+					"height": 509,
+					"dataSource": "Form.generatedJson",
+					"enterable": false,
+					"multiline": "yes",
+					"scrollbarVertical": "visible",
+					"visibility": "hidden"
+				},
+
 				"rectStatusBar": {
 					"type": "rectangle",
-					"class": "statusBar",
+					"class": "darkBar",
 					"left": 0,
-					"top": 488,
-					"width": 820,
-					"height": 30
+					"top": 596,
+					"width": 960,
+					"height": 24
 				},
-				"txtStatus": {
+				"rectStatusDot": {
+					"type": "rectangle",
+					"class": "statusDot",
+					"left": 14,
+					"top": 607,
+					"width": 6,
+					"height": 6
+				},
+				"txtStatusMain": {
 					"type": "text",
-					"class": "statusText",
-					"left": 20,
-					"top": 496,
-					"width": 780,
+					"class": "statusGreen",
+					"left": 26,
+					"top": 603,
+					"width": 260,
 					"height": 16,
 					"dataSource": "Form.statusText"
+				},
+				"rectStatusSep1": {
+					"type": "rectangle",
+					"class": "statusSep",
+					"left": 290,
+					"top": 604,
+					"width": 1,
+					"height": 12
+				},
+				"txtStatusTokens": {
+					"type": "text",
+					"class": "statusDim",
+					"left": 298,
+					"top": 603,
+					"width": 120,
+					"height": 16,
+					"dataSource": "Form.tokenText"
+				},
+				"rectStatusSep2": {
+					"type": "rectangle",
+					"class": "statusSep",
+					"left": 422,
+					"top": 604,
+					"width": 1,
+					"height": 12
+				},
+				"txtStatusVersion": {
+					"type": "text",
+					"class": "statusDim",
+					"left": 430,
+					"top": 603,
+					"width": 160,
+					"height": 16,
+					"dataSource": "Form.versionText"
 				}
+
 			}
 		}
 	]

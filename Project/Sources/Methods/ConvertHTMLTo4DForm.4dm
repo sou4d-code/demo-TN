@@ -1,6 +1,6 @@
 #DECLARE($htmlPath : Text; $formName : Text; $apiKey : Text) : Object
 
-var $result : Object:={success: False; outputPath: ""; error: ""}
+var $result : Object:={success: False; outputPath: ""; json: ""; tokenCount: 0; error: ""}
 
 Try
 	// Read the HTML file
@@ -125,12 +125,20 @@ Try
 		$formFolder.create()
 	End if
 
-	// Write the .4dform file (pretty-printed)
 	var $outputFile : 4D.File:=$formFolder.file("form.4dform")
-	$outputFile.setText(JSON Stringify($parsedForm; *))
+
+	var $prettyJson : Text:=JSON Stringify($parsedForm; *)
+	$outputFile.setText($prettyJson)
 
 	$result.success:=True
 	$result.outputPath:=$outputFile.path
+	$result.json:=$prettyJson
+
+	// Capture token usage if available
+	Try
+		$result.tokenCount:=$response.usage.total_tokens
+	Catch
+	End try
 
 Catch
 	$result.error:=Last errors.first().message
