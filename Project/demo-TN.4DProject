@@ -1,0 +1,11 @@
+{
+	"name": "demo-TN",
+	"uuid": "B119B7B8514C40D8B14856487D56B8D0",
+	"fileVersion": "2",
+	"currentVersion": "1",
+	"product": {
+		"version": "21",
+		"build": "100000",
+		"name": "4D"
+	}
+}
