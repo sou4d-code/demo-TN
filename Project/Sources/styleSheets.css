@@ -1,0 +1,217 @@
+/* ============================================================
+   demo-TN — HTML to 4D Form Converter
+   Cross-platform stylesheet (styleSheets.css)
+   Properties use 4D names as defined in formsSchema.json
+   ============================================================ */
+
+/* ----------------------------------------------------------
+   Header bar
+---------------------------------------------------------- */
+.header {
+    fill: #2C3E50;
+    stroke: transparent;
+    borderStyle: none;
+}
+
+.headerTitle {
+    fill: transparent;
+    stroke: #FFFFFF;
+    borderStyle: none;
+    fontSize: 18;
+    fontWeight: bold;
+}
+
+.headerSubtitle {
+    fill: transparent;
+    stroke: #95A5A6;
+    borderStyle: none;
+    fontSize: 11;
+}
+
+/* ----------------------------------------------------------
+   Labels
+---------------------------------------------------------- */
+.formLabel {
+    fill: transparent;
+    stroke: #2C3E50;
+    borderStyle: none;
+    fontSize: 12;
+    fontWeight: bold;
+}
+
+/* ----------------------------------------------------------
+   Input fields
+---------------------------------------------------------- */
+.inputField {
+    borderStyle: solid;
+    fontSize: 12;
+    borderRadius: 4;
+}
+
+.inputReadOnly {
+    borderStyle: solid;
+    fill: #F4F6F7;
+    stroke: #7F8C8D;
+    fontSize: 12;
+    borderRadius: 4;
+}
+
+.logArea {
+    borderStyle: solid;
+    fill: #FFFFFF;
+    fontSize: 11;
+    borderRadius: 4;
+}
+
+/* ----------------------------------------------------------
+   Buttons
+---------------------------------------------------------- */
+.primaryBtn {
+    fontSize: 14;
+    fontWeight: bold;
+}
+
+.secondaryBtn {
+    fontSize: 12;
+}
+
+/* ----------------------------------------------------------
+   Panels & layout
+---------------------------------------------------------- */
+.panelCard {
+    fill: #F8F9FA;
+    stroke: #DEE2E6;
+    borderStyle: solid;
+    borderRadius: 6;
+}
+
+.divider {
+    fill: #E0E0E0;
+    stroke: transparent;
+    borderStyle: none;
+}
+
+.statusBar {
+    fill: #ECF0F1;
+    stroke: #BDC3C7;
+    borderStyle: solid;
+}
+
+.statusText {
+    fill: transparent;
+    stroke: #555555;
+    borderStyle: none;
+    fontSize: 11;
+}
+
+/* ----------------------------------------------------------
+   Dark mode overrides
+---------------------------------------------------------- */
+@media (prefers-color-scheme: dark) {
+
+    .header {
+        fill: #1a2332;
+    }
+
+    .headerTitle {
+        stroke: #ECF0F1;
+    }
+
+    .headerSubtitle {
+        stroke: #7F8C8D;
+    }
+
+    .formLabel {
+        stroke: #ECF0F1;
+    }
+
+    .inputField {
+        fill: #1e2d3d;
+        stroke: #4a6f8a;
+    }
+
+    .inputReadOnly {
+        fill: #253545;
+        stroke: #4a6f8a;
+    }
+
+    .logArea {
+        fill: #1e2d3d;
+        stroke: #334155;
+    }
+
+    .panelCard {
+        fill: #1e2d3d;
+        stroke: #334155;
+    }
+
+    .divider {
+        fill: #334155;
+    }
+
+    .statusBar {
+        fill: #1a2332;
+        stroke: #2a3f4f;
+    }
+
+    .statusText {
+        stroke: #BDC3C7;
+    }
+}
+
+/* ----------------------------------------------------------
+   Liquid Glass theme overrides (macOS 26+)
+---------------------------------------------------------- */
+@media (form-theme: liquid-glass) and (prefers-color-scheme: light) {
+
+    .header {
+        fill: #1C2B3A;
+    }
+
+    .panelCard {
+        fill: #F0F4F8;
+        stroke: #D1D9E0;
+    }
+
+    .inputField {
+        fill: #FFFFFF;
+        stroke: #C8D0D8;
+    }
+
+    .inputReadOnly {
+        fill: #EEF2F5;
+        stroke: #C8D0D8;
+    }
+
+    .statusBar {
+        fill: #E8EDF2;
+        stroke: #C8D0D8;
+    }
+}
+
+@media (form-theme: liquid-glass) and (prefers-color-scheme: dark) {
+
+    .header {
+        fill: #111D28;
+    }
+
+    .panelCard {
+        fill: #1a2a3a;
+        stroke: #2a3f55;
+    }
+
+    .inputField {
+        fill: #162030;
+        stroke: #2a3f55;
+    }
+
+    .logArea {
+        fill: #162030;
+        stroke: #2a3f55;
+    }
+
+    .statusBar {
+        fill: #111D28;
+        stroke: #1e3045;
+    }
+}

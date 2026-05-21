@@ -41,8 +41,8 @@ Try
 	$systemPrompt:=$systemPrompt+"  ]\n"
 	$systemPrompt:=$systemPrompt+"}\n\n"
 
-	$systemPrompt:=$systemPrompt+"CRITICAL rules:\n"
-	$systemPrompt:=$systemPrompt+"- pages[0].objects must always be empty {} (it is the shared/all-pages placeholder).\n"
+	$systemPrompt:=$systemPrompt+"## CRITICAL structural rules:\n"
+	$systemPrompt:=$systemPrompt+"- pages[0].objects must always be empty {} (shared/all-pages placeholder).\n"
 	$systemPrompt:=$systemPrompt+"- ALL form objects go into pages[1].objects — never at the root level.\n"
 	$systemPrompt:=$systemPrompt+"- Do NOT add an \"objects\" key at the root level.\n"
 	$systemPrompt:=$systemPrompt+"- events must be strings (\"onLoad\", \"onClick\"), never integers.\n\n"
@@ -53,10 +53,27 @@ Try
 	$systemPrompt:=$systemPrompt+"<button>                          → type: \"button\"   (add \"text\": \"<button label>\", events: [\"onClick\"])\n"
 	$systemPrompt:=$systemPrompt+"<select>                          → type: \"dropDown\"\n"
 	$systemPrompt:=$systemPrompt+"<input type=\"checkbox\">           → type: \"checkbox\" (add \"text\": \"<associated label>\")\n"
-	$systemPrompt:=$systemPrompt+"<textarea>                        → type: \"input\"    (add \"scrollbar\": \"vertical\")\n"
+	$systemPrompt:=$systemPrompt+"<textarea>                        → type: \"input\"    (add \"multiline\": \"yes\", \"scrollbarVertical\": \"visible\")\n"
 	$systemPrompt:=$systemPrompt+"<fieldset>                        → type: \"groupBox\" (add \"text\": \"<legend text>\")\n"
 	$systemPrompt:=$systemPrompt+"<img>                             → type: \"picture\"\n"
 	$systemPrompt:=$systemPrompt+"<h1>/<h2>/<h3>                    → type: \"text\"     (increase fontSize accordingly)\n\n"
+
+	$systemPrompt:=$systemPrompt+"## CSS classes — ALWAYS assign a \"class\" property. NEVER add inline style properties (fill, stroke, fontSize, fontWeight, borderStyle, borderRadius).\n"
+	$systemPrompt:=$systemPrompt+"The project stylesheet (styleSheets.css) defines these classes:\n"
+	$systemPrompt:=$systemPrompt+"  \"formLabel\"    → apply to every <label> / static text object\n"
+	$systemPrompt:=$systemPrompt+"  \"inputField\"   → apply to editable <input>, <select>, <textarea> objects\n"
+	$systemPrompt:=$systemPrompt+"  \"inputReadOnly\"→ apply to read-only / display-only input objects\n"
+	$systemPrompt:=$systemPrompt+"  \"primaryBtn\"   → apply to the main submit / confirm button\n"
+	$systemPrompt:=$systemPrompt+"  \"secondaryBtn\" → apply to cancel, reset, or secondary action buttons\n"
+	$systemPrompt:=$systemPrompt+"  \"logArea\"      → apply to multi-line read-only log / output areas\n"
+	$systemPrompt:=$systemPrompt+"  \"panelCard\"    → apply to grouping rectangle behind a section\n"
+	$systemPrompt:=$systemPrompt+"  \"divider\"      → apply to thin horizontal separator rectangles\n"
+	$systemPrompt:=$systemPrompt+"  \"header\"       → apply to a top banner rectangle\n"
+	$systemPrompt:=$systemPrompt+"  \"headerTitle\"  → apply to the title text inside the header\n"
+	$systemPrompt:=$systemPrompt+"  \"statusBar\"    → apply to a bottom status rectangle\n"
+	$systemPrompt:=$systemPrompt+"  \"statusText\"   → apply to the text inside the status bar\n\n"
+	$systemPrompt:=$systemPrompt+"Example object using a CSS class (no inline styling):\n"
+	$systemPrompt:=$systemPrompt+"{\"type\": \"input\", \"class\": \"inputField\", \"left\": 150, \"top\": 60, \"width\": 260, \"height\": 24, \"dataSource\": \"Form.firstName\"}\n\n"
 
 	$systemPrompt:=$systemPrompt+"## Layout rules:\n"
 	$systemPrompt:=$systemPrompt+"- Start at left: 20, top: 20 for the first element.\n"
@@ -66,7 +83,7 @@ Try
 	$systemPrompt:=$systemPrompt+"- Default button: width 120, height 28.\n"
 	$systemPrompt:=$systemPrompt+"- Infer form width from content (typically 460); height proportional to rows.\n"
 	$systemPrompt:=$systemPrompt+"- Object names must be unique camelCase strings derived from id, name, or content.\n"
-	$systemPrompt:=$systemPrompt+"- Every object MUST have: type, left, top, width, height."
+	$systemPrompt:=$systemPrompt+"- Every object MUST have: type, class, left, top, width, height."
 
 	// Build messages collection
 	var $messages : Collection:=[]
