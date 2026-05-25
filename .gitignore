@@ -1,0 +1,45 @@
+# ── 4D Project ───────────────────────────────────────────────
+# Compiled / cache files
+DerivedData/
+*.4DC
+*.4DZ
+*.journal
+
+# 4D Server data files (keep structure, ignore content)
+Data/
+Logs/
+Settings/
+
+# Compiled structure / data files (binary)
+*.4DB
+*.4DD
+
+# 4D temporary files
+*.tmp
+*.lock
+
+# ── macOS ────────────────────────────────────────────────────
+.DS_Store
+.AppleDouble
+.LSOverride
+._*
+.Spotlight-V100
+.Trashes
+
+# ── Claude Code ──────────────────────────────────────────────
+# Keep launch.json and settings tracked; ignore worktrees
+.claude/worktrees/
+
+# ── Dev server scripts (generated, not source) ───────────────
+.claude/serve_*.py
+
+# ── Editor / IDE ─────────────────────────────────────────────
+.vscode/
+*.swp
+*.swo
+*~
+
+# ── Secrets ──────────────────────────────────────────────────
+.env
+.env.*
+*.key
