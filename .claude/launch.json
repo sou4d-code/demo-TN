@@ -1,0 +1,17 @@
+{
+  "version": "0.0.1",
+  "configurations": [
+    {
+      "name": "Mockup Preview",
+      "runtimeExecutable": "python3",
+      "runtimeArgs": ["/tmp/serve_mockup.py"],
+      "port": 8080
+    },
+    {
+      "name": "Sample HTML Preview",
+      "runtimeExecutable": "python3",
+      "runtimeArgs": ["/tmp/serve_sample.py"],
+      "port": 8081
+    }
+  ]
+}
