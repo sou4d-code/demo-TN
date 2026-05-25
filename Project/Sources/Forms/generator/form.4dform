@@ -119,6 +119,7 @@
 				"btnBrowse": {
 					"type": "button",
 					"class": "browseBtn",
+					"style": "bevel",
 					"left": 196,
 					"top": 82,
 					"width": 60,
@@ -210,6 +211,14 @@
 					"dataSource": "Form.apiKey",
 					"placeholder": "sk-proj-…"
 				},
+				"rectConvertBg": {
+					"type": "rectangle",
+					"class": "convertBg",
+					"left": 8,
+					"top": 318,
+					"width": 248,
+					"height": 36
+				},
 				"btnConvert": {
 					"type": "button",
 					"class": "convertBtn",
@@ -218,6 +227,7 @@
 					"width": 248,
 					"height": 36,
 					"text": "Convert →",
+					"style": "toolbar",
 					"method": "ObjectMethods/btnConvert.4dm",
 					"events": ["onClick"]
 				},
@@ -276,44 +286,24 @@
 					"left": 265,
 					"top": 48,
 					"width": 695,
-					"height": 38
+					"height": 42
 				},
-				"btnTabPreview": {
-					"type": "button",
-					"class": "tabActive",
-					"left": 281,
-					"top": 60,
-					"width": 80,
-					"height": 18,
-					"text": "Live Preview",
-					"style": "flat",
-					"method": "ObjectMethods/tabPreview.4dm",
-					"events": ["onClick"]
-				},
-				"rectTabIndicator": {
-					"type": "rectangle",
-					"left": 281,
-					"top": 84,
-					"width": 80,
-					"height": 2
-				},
-				"btnTabJson": {
-					"type": "button",
-					"class": "tabInactive",
-					"left": 369,
-					"top": 60,
-					"width": 80,
-					"height": 18,
-					"text": "Output JSON",
-					"style": "flat",
-					"method": "ObjectMethods/tabJson.4dm",
+				"tabMain": {
+					"type": "tab",
+					"left": 277,
+					"top": 57,
+					"width": 200,
+					"height": 26,
+					"dataSource": "Form.activeTab",
+					"choiceList": ["Live Preview", "Output JSON"],
+					"method": "ObjectMethods/tabMain.4dm",
 					"events": ["onClick"]
 				},
 				"txtPreviewUrl": {
 					"type": "text",
 					"class": "urlBadge",
 					"left": 700,
-					"top": 59,
+					"top": 62,
 					"width": 250,
 					"height": 18,
 					"dataSource": "Form.previewUrl",
@@ -323,7 +313,7 @@
 					"type": "rectangle",
 					"class": "previewHDivider",
 					"left": 265,
-					"top": 86,
+					"top": 90,
 					"width": 695,
 					"height": 1
 				},
@@ -331,18 +321,18 @@
 				"webPreview": {
 					"type": "webArea",
 					"left": 265,
-					"top": 87,
+					"top": 91,
 					"width": 695,
-					"height": 509,
+					"height": 505,
 					"dataSource": "Form.previewUrl"
 				},
 				"areaJsonOutput": {
 					"type": "input",
 					"class": "jsonOutput",
 					"left": 265,
-					"top": 87,
+					"top": 91,
 					"width": 695,
-					"height": 509,
+					"height": 505,
 					"dataSource": "Form.generatedJson",
 					"enterable": false,
 					"multiline": "yes",

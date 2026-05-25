@@ -8,6 +8,7 @@ property statusText : Text
 property tokenText : Text
 property versionText : Text
 property generatedJson : Text
+property activeTab : Integer
 property actions : Object
 
 Class constructor()
@@ -21,6 +22,7 @@ Class constructor()
 	This.tokenText:=""
 	This.versionText:="4D v21 · Project Mode"
 	This.generatedJson:=""
+	This.activeTab:=1
 	This.actions:={converting: {running: 0}}
 
 //MARK: - Form & form objects event handlers
@@ -90,24 +92,13 @@ Function btnConvertEventHandler($formEventCode : Integer)
 			End if
 	End case
 
-Function tabPreviewEventHandler($formEventCode : Integer)
+Function tabMainEventHandler($formEventCode : Integer)
 	Case of
 		: ($formEventCode=On Clicked)
-			OBJECT SET VISIBLE(*; "webPreview"; True)
-			OBJECT SET VISIBLE(*; "areaJsonOutput"; False)
-			OBJECT SET RGB COLORS(*; "btnTabPreview"; 0x2563EB; -1; -1)
-			OBJECT SET RGB COLORS(*; "btnTabJson"; 0x94A3B8; -1; -1)
-			OBJECT SET VISIBLE(*; "rectTabIndicator"; True)
-	End case
-
-Function tabJsonEventHandler($formEventCode : Integer)
-	Case of
-		: ($formEventCode=On Clicked)
-			OBJECT SET VISIBLE(*; "webPreview"; False)
-			OBJECT SET VISIBLE(*; "areaJsonOutput"; True)
-			OBJECT SET RGB COLORS(*; "btnTabJson"; 0x2563EB; -1; -1)
-			OBJECT SET RGB COLORS(*; "btnTabPreview"; 0x94A3B8; -1; -1)
-			OBJECT SET VISIBLE(*; "rectTabIndicator"; False)
+			// activeTab is 1-based: 1 = Live Preview, 2 = Output JSON
+			var $showPreview : Boolean:=(This.activeTab=1)
+			OBJECT SET VISIBLE(*; "webPreview"; $showPreview)
+			OBJECT SET VISIBLE(*; "areaJsonOutput"; Not($showPreview))
 	End case
 
 //MARK: - Helpers
