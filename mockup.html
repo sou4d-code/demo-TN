@@ -2,499 +2,318 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <title>Generator — Mockup v2</title>
+  <title>HTML → 4D Form Converter</title>
   <style>
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
     :root {
-      --bg:           #E8EAED;
-      --surface:      #FFFFFF;
-      --sidebar-bg:   #F3F4F6;
-      --sidebar-bd:   #E5E7EB;
-      --header-bg:    #F3F4F6;
-      --border:       #E5E7EB;
-      --border-md:    #D1D5DB;
-      --accent:       #3B82F6;
-      --accent-dk:    #2563EB;
-      --text-1:       #111827;
-      --text-2:       #4B5563;
-      --text-3:       #9CA3AF;
-      --sb-label:     #6B7280;
-      --sb-fieldlbl:  #374151;
-      --sb-text:      #111827;
-      --sb-input-bg:  #FFFFFF;
-      --sb-input-bd:  #D1D5DB;
-      --sb-hint:      #9CA3AF;
-      --green:        #4ADE80;
-      --red:          #F87171;
-      --mono:         "SF Mono", "Fira Code", "Menlo", monospace;
+      --navy:        #0F172A;
+      --navy-2:      #1E293B;
+      --blue:        #2563EB;
+      --blue-light:  #3B82F6;
+      --blue-pale:   #EFF6FF;
+      --blue-bd:     #BFDBFE;
+      --green:       #10B981;
+      --green-pale:  #ECFDF5;
+      --amber:       #F59E0B;
+      --red:         #EF4444;
+      --bg:          #F1F5F9;
+      --surface:     #FFFFFF;
+      --border:      #E2E8F0;
+      --border-md:   #CBD5E1;
+      --text-1:      #0F172A;
+      --text-2:      #475569;
+      --text-3:      #94A3B8;
+      --mono:        "SF Mono", "Fira Code", Menlo, monospace;
+      --radius:      10px;
+      --sidebar-w:   272px;
     }
 
     body {
       font-family: -apple-system, BlinkMacSystemFont, "Inter", "Segoe UI", sans-serif;
       background: var(--bg);
       min-height: 100vh;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      padding: 40px;
-    }
-
-    /* ── Window shell ── */
-    .window {
-      width: 960px;
-      height: 620px;
-      border-radius: 12px;
-      overflow: hidden;
-      box-shadow:
-        0 0 0 1px rgba(0,0,0,0.12),
-        0 8px 24px rgba(0,0,0,0.12),
-        0 32px 64px rgba(0,0,0,0.16);
-      display: flex;
-      flex-direction: column;
-      background: var(--surface);
-    }
-
-    /* ── Title bar ── */
-    .titlebar {
-      background: var(--header-bg);
-      height: 48px;
-      display: flex;
-      align-items: center;
-      padding: 0 16px;
-      gap: 14px;
-      flex-shrink: 0;
-      position: relative;
-      border-bottom: 1px solid var(--border);
-    }
-
-    .traffic { display: flex; gap: 7px; }
-    .tl { width: 12px; height: 12px; border-radius: 50%; }
-    .tl.r { background: #FF5F57; box-shadow: 0 0 0 0.5px rgba(0,0,0,0.2) inset; }
-    .tl.y { background: #FEBC2E; box-shadow: 0 0 0 0.5px rgba(0,0,0,0.2) inset; }
-    .tl.g { background: #28C840; box-shadow: 0 0 0 0.5px rgba(0,0,0,0.2) inset; }
-
-    .titlebar-center {
-      position: absolute;
-      left: 50%; transform: translateX(-50%);
-      display: flex;
-      align-items: center;
-      gap: 8px;
-    }
-
-    .titlebar-icon {
-      width: 18px; height: 18px;
-      background: linear-gradient(135deg, #3B82F6, #8B5CF6);
-      border-radius: 4px;
       display: flex; align-items: center; justify-content: center;
-      font-size: 10px;
+      padding: 32px;
     }
 
-    .titlebar-name {
-      color: var(--text-1);
-      font-size: 13px;
-      font-weight: 500;
-      letter-spacing: -0.1px;
+    /* ═══════════════════════════════════════
+       Window shell
+    ═══════════════════════════════════════ */
+    .window {
+      width: 980px; height: 640px;
+      border-radius: 12px; overflow: hidden;
+      display: flex; flex-direction: column;
+      box-shadow: 0 0 0 1px rgba(0,0,0,0.10),
+                  0 4px 6px -1px rgba(0,0,0,0.08),
+                  0 20px 50px -10px rgba(0,0,0,0.22);
     }
 
-    .titlebar-right {
-      margin-left: auto;
-      display: flex;
-      align-items: center;
-      gap: 6px;
+    /* ═══════════════════════════════════════
+       Title bar  — deep navy
+    ═══════════════════════════════════════ */
+    .titlebar {
+      background: var(--navy);
+      height: 44px; flex-shrink: 0;
+      display: flex; align-items: center;
+      padding: 0 16px; gap: 12px;
+      position: relative;
     }
 
-    .badge {
-      background: var(--border);
-      border: 1px solid var(--border-md);
-      border-radius: 20px;
-      padding: 2px 10px;
-      font-size: 10.5px;
-      color: var(--text-2);
-      font-weight: 500;
-      letter-spacing: 0.2px;
+    .traffic { display: flex; gap: 6px; }
+    .tl { width: 12px; height: 12px; border-radius: 50%; }
+    .tl.r { background: #FF5F57; }
+    .tl.y { background: #FEBC2E; }
+    .tl.g { background: #28C840; }
+
+    .tb-center {
+      position: absolute; left: 50%; transform: translateX(-50%);
+      display: flex; align-items: center; gap: 8px;
+    }
+    .tb-icon {
+      width: 20px; height: 20px; border-radius: 5px;
+      background: linear-gradient(135deg, #3B82F6 0%, #8B5CF6 100%);
+      display: flex; align-items: center; justify-content: center;
+      font-size: 11px;
+    }
+    .tb-title { color: #F8FAFC; font-size: 13px; font-weight: 500; letter-spacing: -0.1px; }
+
+    .tb-right { margin-left: auto; }
+    .tb-badge {
+      background: rgba(255,255,255,0.08);
+      border: 1px solid rgba(255,255,255,0.12);
+      border-radius: 20px; padding: 3px 10px;
+      font-size: 10.5px; color: #94A3B8; font-weight: 500;
     }
 
-    /* ── Body (sidebar + main) ── */
-    .body {
-      display: flex;
-      flex: 1;
-      min-height: 0;
-    }
+    /* ═══════════════════════════════════════
+       Body
+    ═══════════════════════════════════════ */
+    .body { flex: 1; display: flex; overflow: hidden; }
 
-    /* ── Sidebar ── */
+    /* ═══════════════════════════════════════
+       Sidebar
+    ═══════════════════════════════════════ */
     .sidebar {
-      width: 264px;
-      flex-shrink: 0;
-      border-right: 1px solid #2D3F55;
-      background: var(--sidebar-bg);
-      display: flex;
-      flex-direction: column;
-      overflow: hidden;
+      width: var(--sidebar-w); flex-shrink: 0;
+      background: var(--surface);
+      border-right: 1px solid var(--border);
+      display: flex; flex-direction: column;
+      overflow-y: auto;
     }
 
-    .sidebar-section {
-      padding: 14px 16px;
-      border-bottom: 1px solid var(--sidebar-bd);
+    /* Sidebar hero */
+    .sb-hero {
+      background: linear-gradient(135deg, #1E40AF 0%, #3B82F6 100%);
+      padding: 20px 18px 16px;
     }
-
-    .sidebar-section:last-child { border-bottom: none; flex: 1; display: flex; flex-direction: column; }
-
-    .section-title {
-      font-size: 10px;
-      font-weight: 700;
-      letter-spacing: 0.8px;
-      text-transform: uppercase;
-      color: var(--sb-label);
-      margin-bottom: 10px;
-      display: flex;
-      align-items: center;
-      gap: 8px;
-    }
-
-    .section-title::after {
-      content: '';
-      flex: 1;
-      height: 1px;
-      background: var(--sidebar-bd);
-    }
-
-    /* File picker row */
-    .file-row {
-      display: flex;
-      align-items: center;
-      gap: 6px;
+    .sb-hero-label {
+      font-size: 9px; font-weight: 700; letter-spacing: 1px;
+      color: rgba(255,255,255,0.55); text-transform: uppercase;
       margin-bottom: 4px;
     }
-
-    .file-input {
-      flex: 1;
-      height: 28px;
-      background: var(--sb-input-bg);
-      border: 1px solid var(--sb-input-bd);
-      border-radius: 6px;
-      padding: 0 10px;
-      font-size: 11px;
-      font-family: var(--mono);
-      color: var(--sb-text);
-      min-width: 0;
-      overflow: hidden;
-      text-overflow: ellipsis;
-      white-space: nowrap;
-      display: flex;
-      align-items: center;
+    .sb-hero-title { font-size: 15px; font-weight: 700; color: #FFF; line-height: 1.2; }
+    .sb-hero-sub { font-size: 11px; color: rgba(255,255,255,0.6); margin-top: 2px; }
+    .sb-hero-badges { display: flex; gap: 6px; margin-top: 10px; flex-wrap: wrap; }
+    .sb-pill {
+      background: rgba(255,255,255,0.15);
+      border: 1px solid rgba(255,255,255,0.2);
+      border-radius: 20px; padding: 2px 8px;
+      font-size: 10px; color: rgba(255,255,255,0.85); font-weight: 500;
     }
 
-    .file-hint {
-      font-size: 10px;
-      color: var(--sb-hint);
-      margin-bottom: 0;
-      padding-left: 2px;
+    /* Sidebar sections */
+    .sb-section { padding: 14px 16px; border-bottom: 1px solid var(--border); }
+    .sb-section:last-child { border-bottom: none; flex: 1; }
+
+    .sb-section-label {
+      font-size: 9.5px; font-weight: 700; letter-spacing: 0.8px;
+      text-transform: uppercase; color: var(--text-3);
+      margin-bottom: 10px; display: flex; align-items: center; gap: 5px;
+    }
+    .sb-section-label::after {
+      content: ''; flex: 1; height: 1px; background: var(--border);
     }
 
-    .btn {
-      height: 28px;
-      padding: 0 10px;
-      border-radius: 6px;
-      font-size: 11px;
-      font-weight: 500;
-      cursor: pointer;
-      border: 1px solid var(--border-md);
-      background: #FFFFFF;
-      color: var(--text-2);
-      white-space: nowrap;
-      display: inline-flex;
-      align-items: center;
-      gap: 5px;
-      flex-shrink: 0;
+    /* File input row */
+    .sb-file-row { display: flex; gap: 6px; align-items: stretch; }
+    .sb-file-input {
+      flex: 1; min-width: 0; height: 30px;
+      background: var(--bg); border: 1px solid var(--border-md);
+      border-radius: 6px; padding: 0 10px;
+      font-size: 11px; color: var(--text-2);
+      font-family: var(--mono); white-space: nowrap;
+      overflow: hidden; text-overflow: ellipsis;
+      display: flex; align-items: center;
     }
+    .sb-file-hint { font-size: 10px; color: var(--text-3); margin-top: 5px; }
 
-    .btn:hover { background: var(--border); }
-
-    /* Form fields */
-    .field { margin-bottom: 10px; }
-    .field:last-of-type { margin-bottom: 0; }
-
-    .field-label {
-      font-size: 10.5px;
-      font-weight: 600;
-      color: var(--sb-fieldlbl);
-      margin-bottom: 5px;
-      letter-spacing: 0.1px;
+    .sb-btn {
+      height: 30px; padding: 0 12px; border-radius: 6px;
+      border: 1px solid var(--border-md); background: var(--surface);
+      color: var(--text-2); font-size: 11px; font-weight: 500;
+      cursor: pointer; display: flex; align-items: center; gap: 5px;
+      white-space: nowrap; flex-shrink: 0;
     }
+    .sb-btn:hover { background: var(--bg); }
 
-    .field-input {
-      width: 100%;
-      height: 28px;
-      background: var(--sb-input-bg);
-      border: 1px solid var(--sb-input-bd);
-      border-radius: 6px;
-      padding: 0 10px;
-      font-size: 12px;
-      color: var(--sb-text);
-      transition: border-color 0.15s;
+    /* Field */
+    .sb-field { margin-bottom: 8px; }
+    .sb-field:last-child { margin-bottom: 0; }
+    .sb-field-label { font-size: 11px; font-weight: 600; color: var(--text-2); margin-bottom: 4px; }
+    .sb-input {
+      width: 100%; height: 30px;
+      background: var(--surface); border: 1px solid var(--border-md);
+      border-radius: 6px; padding: 0 10px;
+      font-size: 12px; color: var(--text-1);
     }
-
-    .field-input:focus { outline: none; border-color: var(--accent); box-shadow: 0 0 0 3px rgba(59,130,246,0.15); }
-
-    .field-input.api {
-      font-family: var(--mono);
-      font-size: 11px;
-      letter-spacing: 0.5px;
-      color: var(--sb-hint);
-    }
+    .sb-input.mono { font-family: var(--mono); font-size: 11px; color: var(--text-2); }
+    .sb-input::placeholder { color: var(--text-3); }
 
     /* Convert button */
     .convert-btn {
-      width: 100%;
-      height: 36px;
-      background: linear-gradient(135deg, #2563EB, #4F46E5);
-      color: #FFFFFF;
-      border: none;
-      border-radius: 8px;
-      font-size: 13px;
-      font-weight: 600;
-      cursor: pointer;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      gap: 8px;
-      letter-spacing: -0.1px;
-      box-shadow: 0 1px 3px rgba(37,99,235,0.3), 0 4px 12px rgba(37,99,235,0.2);
-      margin-top: 4px;
-      transition: opacity 0.15s, transform 0.1s;
+      width: 100%; height: 38px; border-radius: 8px;
+      background: linear-gradient(135deg, #2563EB 0%, #1D4ED8 100%);
+      border: none; color: #FFF;
+      font-size: 13px; font-weight: 600; letter-spacing: 0.2px;
+      cursor: pointer; display: flex; align-items: center; justify-content: center;
+      gap: 8px; margin-top: 12px;
+      box-shadow: 0 1px 3px rgba(37,99,235,0.4), 0 4px 12px rgba(37,99,235,0.2);
+      transition: filter 0.15s;
     }
-    .convert-btn:hover { opacity: 0.92; transform: translateY(-1px); }
-    .convert-btn:active { transform: translateY(0); }
+    .convert-btn:hover { filter: brightness(1.08); }
+    .convert-arrow { font-size: 15px; }
 
-    .convert-arrow {
-      font-size: 15px;
-      line-height: 1;
+    /* Log area */
+    .sb-log {
+      flex: 1; min-height: 80px;
+      background: var(--bg); border: 1px solid var(--border);
+      border-radius: 6px; padding: 8px;
+      font-size: 10.5px; font-family: var(--mono);
+      color: var(--text-2); overflow-y: auto; line-height: 1.6;
     }
+    .log-line { display: flex; gap: 8px; }
+    .log-time { color: var(--text-3); flex-shrink: 0; }
+    .log-ok   { color: var(--green); }
+    .log-err  { color: var(--red); }
 
-    /* ── Log section ── */
-    .log-wrap {
-      flex: 1;
-      display: flex;
-      flex-direction: column;
-      min-height: 0;
-    }
+    /* ═══════════════════════════════════════
+       Main panel
+    ═══════════════════════════════════════ */
+    .main { flex: 1; display: flex; flex-direction: column; background: #F8FAFC; }
 
-    .log-scroll {
-      flex: 1;
-      overflow-y: auto;
-      font-family: var(--mono);
-      font-size: 10.5px;
-      line-height: 1.75;
-      padding: 2px 0;
-    }
-
-    .log-line {
-      display: flex;
-      gap: 8px;
-      padding: 1px 0;
-      border-radius: 3px;
-    }
-    .log-line:hover { background: rgba(0,0,0,0.03); }
-
-    .log-ts { color: var(--text-3); flex-shrink: 0; }
-    .log-txt { color: var(--text-2); }
-    .log-txt.ok  { color: var(--green); font-weight: 600; }
-    .log-txt.err { color: var(--red); }
-    .log-txt.dim { color: var(--text-3); }
-
-    /* ── Main panel ── */
-    .main {
-      flex: 1;
-      min-width: 0;
-      display: flex;
-      flex-direction: column;
+    /* Tab bar */
+    .tab-bar {
       background: var(--surface);
-    }
-
-    .preview-header {
-      height: 46px;
       border-bottom: 1px solid var(--border);
-      display: flex;
-      align-items: center;
-      padding: 0 16px;
-      gap: 10px;
-      flex-shrink: 0;
-      background: #FFFFFF;
+      height: 44px; flex-shrink: 0;
+      display: flex; align-items: center;
+      padding: 0 18px; gap: 12px;
     }
 
-    /* Segmented tab control */
-    .tab-control {
-      display: flex;
-      align-items: center;
-      background: var(--border);
-      border-radius: 7px;
-      padding: 3px;
-      gap: 2px;
+    .tab-seg {
+      display: flex; background: var(--bg);
+      border: 1px solid var(--border);
+      border-radius: 8px; padding: 3px; gap: 2px;
+    }
+    .tab-btn {
+      height: 28px; padding: 0 14px; border-radius: 6px;
+      font-size: 12px; font-weight: 500; cursor: pointer;
+      display: flex; align-items: center; gap: 6px;
+      color: var(--text-3); border: none; background: transparent;
+      transition: all 0.15s;
+    }
+    .tab-btn.active {
+      background: var(--surface); color: var(--text-1);
+      box-shadow: 0 1px 4px rgba(0,0,0,0.10);
+    }
+    .tab-dot { width: 6px; height: 6px; border-radius: 50%; background: var(--green); }
+
+    .tab-url {
+      margin-left: auto; font-family: var(--mono); font-size: 10.5px;
+      color: var(--text-3); background: var(--bg);
+      border: 1px solid var(--border); border-radius: 6px;
+      padding: 3px 10px; max-width: 280px;
+      overflow: hidden; text-overflow: ellipsis; white-space: nowrap;
     }
 
-    .tab {
-      display: flex;
-      align-items: center;
-      gap: 5px;
-      font-size: 12px;
-      font-weight: 500;
-      color: var(--text-2);
-      padding: 4px 12px;
-      border-radius: 5px;
-      cursor: pointer;
-      transition: background 0.15s, color 0.15s, box-shadow 0.15s;
-      user-select: none;
-      white-space: nowrap;
-    }
-    .tab.active {
-      background: #FFFFFF;
-      color: var(--text-1);
-      box-shadow: 0 1px 3px rgba(0,0,0,0.12), 0 0 0 0.5px rgba(0,0,0,0.06);
+    /* Web preview area */
+    .preview-area {
+      flex: 1; overflow-y: auto; padding: 24px;
+      display: flex; flex-direction: column; align-items: center;
     }
 
-    .tab-dot {
-      width: 6px; height: 6px;
-      border-radius: 50%;
-      background: var(--accent);
+    /* ── Rendered HTML preview ── */
+    .html-card {
+      width: 100%; max-width: 560px;
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      box-shadow: 0 1px 3px rgba(0,0,0,0.06), 0 4px 16px rgba(0,0,0,0.06);
+      overflow: hidden;
+    }
+    .html-card-header {
+      background: linear-gradient(135deg, #1E40AF 0%, #3B82F6 100%);
+      padding: 18px 24px 14px;
+    }
+    .html-card-header h1 { font-size: 18px; font-weight: 700; color: #FFF; }
+    .html-card-header p { font-size: 12px; color: rgba(255,255,255,0.65); margin-top: 2px; }
+
+    .html-card-body { padding: 20px 24px; }
+
+    .form-section { margin-bottom: 20px; }
+    .form-section-title {
+      font-size: 10px; font-weight: 700; letter-spacing: 0.8px;
+      text-transform: uppercase; color: var(--text-3);
+      margin-bottom: 12px; display: flex; align-items: center; gap: 8px;
+    }
+    .form-section-title::after { content: ''; flex: 1; height: 1px; background: var(--border); }
+
+    .form-row { display: flex; align-items: center; margin-bottom: 10px; gap: 0; }
+    .form-row label { width: 120px; font-size: 12px; font-weight: 500; color: var(--text-2); flex-shrink: 0; }
+    .form-row input, .form-row select {
+      flex: 1; height: 32px; border: 1px solid var(--border-md);
+      border-radius: 6px; padding: 0 10px; font-size: 12px;
+      background: var(--surface); color: var(--text-1);
+    }
+    .form-row input:focus, .form-row select:focus {
+      outline: none; border-color: var(--blue); box-shadow: 0 0 0 3px var(--blue-pale);
     }
 
-    .preview-url {
-      margin-left: auto;
-      font-size: 10.5px;
-      font-family: var(--mono);
-      color: var(--text-3);
-      background: var(--border);
-      padding: 2px 8px;
-      border-radius: 4px;
+    .form-actions {
+      display: flex; justify-content: flex-end; gap: 8px;
+      padding-top: 16px; border-top: 1px solid var(--border); margin-top: 4px;
+    }
+    .btn-cancel {
+      height: 34px; padding: 0 18px; border-radius: 7px;
+      border: 1px solid var(--border-md); background: var(--surface);
+      color: var(--text-2); font-size: 12px; font-weight: 500; cursor: pointer;
+    }
+    .btn-submit {
+      height: 34px; padding: 0 20px; border-radius: 7px;
+      background: var(--navy); border: none;
+      color: #FFF; font-size: 12px; font-weight: 600; cursor: pointer;
     }
 
-    /* Web area */
-    .web-area {
-      flex: 1;
-      overflow-y: auto;
-      background: #FEFEFE;
-      position: relative;
-    }
-
-    /* Simulated HTML form in preview */
-    .html-preview {
-      padding: 28px 32px;
-      font-family: -apple-system, BlinkMacSystemFont, sans-serif;
-      font-size: 13px;
-      color: #1a1a1a;
-      max-width: 520px;
-    }
-
-    .html-preview h1 {
-      font-size: 20px;
-      font-weight: 700;
-      color: #1a1a1a;
-      margin-bottom: 20px;
-      padding-bottom: 12px;
-      border-bottom: 1px solid #eee;
-    }
-
-    .html-preview fieldset {
-      border: 1px solid #ddd;
-      border-radius: 6px;
-      padding: 12px 16px;
-      margin-bottom: 16px;
-    }
-
-    .html-preview legend {
-      font-size: 11px;
-      font-weight: 700;
-      text-transform: uppercase;
-      letter-spacing: 0.5px;
-      color: #666;
-      padding: 0 6px;
-    }
-
-    .html-preview .row {
-      display: flex;
-      align-items: center;
-      gap: 10px;
-      margin-bottom: 8px;
-    }
-    .html-preview .row:last-child { margin-bottom: 0; }
-
-    .html-preview label {
-      width: 110px;
-      font-size: 12px;
-      color: #555;
-      flex-shrink: 0;
-    }
-
-    .html-preview input[type=text],
-    .html-preview input[type=email],
-    .html-preview select {
-      flex: 1;
-      height: 26px;
-      border: 1px solid #ccc;
-      border-radius: 4px;
-      padding: 0 8px;
-      font-size: 12px;
-      background: #fff;
-    }
-
-    .html-preview .actions {
-      display: flex;
-      justify-content: flex-end;
-      gap: 8px;
-      margin-top: 8px;
-    }
-    .html-preview .pbtn {
-      padding: 6px 18px;
-      font-size: 12px;
-      border-radius: 5px;
-      cursor: pointer;
-      font-weight: 500;
-    }
-    .html-preview .pbtn.cancel {
-      background: #f5f5f5;
-      border: 1px solid #ccc;
-      color: #555;
-    }
-    .html-preview .pbtn.submit {
-      background: #1a1a1a;
-      color: #fff;
-      border: none;
-    }
-
-    /* ── Status bar ── */
+    /* ═══════════════════════════════════════
+       Status bar
+    ═══════════════════════════════════════ */
     .statusbar {
-      height: 24px;
-      background: var(--header-bg);
+      background: var(--surface);
       border-top: 1px solid var(--border);
-      display: flex;
-      align-items: center;
-      padding: 0 16px;
-      gap: 16px;
-      flex-shrink: 0;
+      height: 28px; flex-shrink: 0;
+      display: flex; align-items: center;
+      padding: 0 16px; gap: 20px;
     }
-
-    .status-item {
-      display: flex;
-      align-items: center;
-      gap: 5px;
-      font-size: 10.5px;
-      color: var(--text-3);
+    .st-item {
+      display: flex; align-items: center; gap: 5px;
+      font-size: 10.5px; color: var(--text-3); white-space: nowrap;
     }
-
-    .status-item.ok { color: #16A34A; }
-
-    .status-dot {
-      width: 5px; height: 5px;
-      border-radius: 50%;
-      background: #4ADE80;
-      box-shadow: 0 0 5px rgba(74,222,128,0.6);
-    }
-
-    .status-sep {
-      width: 1px; height: 12px;
-      background: rgba(255,255,255,0.08);
-    }
+    .st-dot { width: 6px; height: 6px; border-radius: 50%; }
+    .st-dot.green { background: var(--green); }
+    .st-item.ok { color: var(--green); }
+    .st-sep { width: 1px; height: 14px; background: var(--border); }
+    .st-right { margin-left: auto; }
   </style>
 </head>
 <body>
@@ -503,16 +322,14 @@
   <!-- Title bar -->
   <div class="titlebar">
     <div class="traffic">
-      <div class="tl r"></div>
-      <div class="tl y"></div>
-      <div class="tl g"></div>
+      <div class="tl r"></div><div class="tl y"></div><div class="tl g"></div>
     </div>
-    <div class="titlebar-center">
-      <div class="titlebar-icon">⚡</div>
-      <span class="titlebar-name">HTML → 4D Form Converter</span>
+    <div class="tb-center">
+      <div class="tb-icon">⚡</div>
+      <span class="tb-title">HTML → 4D Form Converter</span>
     </div>
-    <div class="titlebar-right">
-      <span class="badge">4D AIKit · gpt-4o</span>
+    <div class="tb-right">
+      <span class="tb-badge">4D AIKit · gpt-4o</span>
     </div>
   </div>
 
@@ -522,103 +339,120 @@
     <!-- Sidebar -->
     <div class="sidebar">
 
-      <!-- Source file -->
-      <div class="sidebar-section">
-        <div class="section-title">Source File</div>
-        <div class="file-row">
-          <div class="file-input">~/Documents/sample.html</div>
-          <button class="btn">
-            <span>📂</span> Browse
-          </button>
+      <!-- Hero -->
+      <div class="sb-hero">
+        <div class="sb-hero-label">4D AIKit Demo</div>
+        <div class="sb-hero-title">Form Generator</div>
+        <div class="sb-hero-sub">HTML → .4dform via GPT-4o</div>
+        <div class="sb-hero-badges">
+          <span class="sb-pill">Project Mode</span>
+          <span class="sb-pill">4D v21</span>
         </div>
-        <div class="file-hint">sample.html · 3.2 KB</div>
+      </div>
+
+      <!-- Source file -->
+      <div class="sb-section">
+        <div class="sb-section-label">Source File</div>
+        <div class="sb-file-row">
+          <div class="sb-file-input">~/Documents/sample.html</div>
+          <button class="sb-btn">📂 Browse</button>
+        </div>
+        <div class="sb-file-hint">sample.html · 3.2 KB</div>
       </div>
 
       <!-- Output -->
-      <div class="sidebar-section">
-        <div class="section-title">Output</div>
-        <div class="field">
-          <div class="field-label"><span class="dot"></span>Form Name</div>
-          <input class="field-input" type="text" value="employeeReg">
+      <div class="sb-section">
+        <div class="sb-section-label">Output</div>
+        <div class="sb-field">
+          <div class="sb-field-label">Form Name</div>
+          <input class="sb-input" type="text" value="employeeReg">
         </div>
       </div>
 
-      <!-- API -->
-      <div class="sidebar-section">
-        <div class="section-title">OpenAI</div>
-        <div class="field">
-          <div class="field-label"><span class="dot"></span>API Key</div>
-          <input class="field-input api" type="password" value="sk-proj-xxxxxxxxxxxxxxxx">
+      <!-- OpenAI -->
+      <div class="sb-section">
+        <div class="sb-section-label">OpenAI</div>
+        <div class="sb-field">
+          <div class="sb-field-label">API Key</div>
+          <input class="sb-input mono" type="password" value="sk-proj-xxxxxxxxxxxxxxxx">
         </div>
         <button class="convert-btn">
-          <span>Convert</span>
-          <span class="convert-arrow">→</span>
+          <span>Convert</span><span class="convert-arrow">→</span>
         </button>
       </div>
 
       <!-- Log -->
-      <div class="sidebar-section">
-        <div class="section-title">Log</div>
-        <div class="log-wrap">
-          <div class="log-scroll">
-            <div class="log-line"><span class="log-ts">10:21:04</span><span class="log-txt dim">Ready</span></div>
-            <div class="log-line"><span class="log-ts">10:23:11</span><span class="log-txt">File loaded: sample.html</span></div>
-            <div class="log-line"><span class="log-ts">10:23:12</span><span class="log-txt">Starting → employeeReg</span></div>
-            <div class="log-line"><span class="log-ts">10:23:12</span><span class="log-txt dim">Calling OpenAI API…</span></div>
-            <div class="log-line"><span class="log-ts">10:23:15</span><span class="log-txt ok">✓ form.4dform written</span></div>
-          </div>
+      <div class="sb-section" style="flex:1; display:flex; flex-direction:column;">
+        <div class="sb-section-label">Log</div>
+        <div class="sb-log">
+          <div class="log-line"><span class="log-time">10:21:04</span><span>Ready</span></div>
+          <div class="log-line"><span class="log-time">10:23:11</span><span>File loaded: sample.html</span></div>
+          <div class="log-line"><span class="log-time">10:23:12</span><span>Starting → employeeReg</span></div>
+          <div class="log-line"><span class="log-time">10:23:12</span><span>Calling OpenAI API…</span></div>
+          <div class="log-line"><span class="log-time">10:23:15</span><span class="log-ok">✓ form.4dform written</span></div>
         </div>
       </div>
 
-    </div>
+    </div><!-- /sidebar -->
 
-    <!-- Main preview -->
+    <!-- Main panel -->
     <div class="main">
-      <div class="preview-header">
-        <div class="tab-control">
-          <div class="tab active"><div class="tab-dot"></div>Live Preview</div>
-          <div class="tab">Output JSON</div>
+
+      <!-- Tab bar -->
+      <div class="tab-bar">
+        <div class="tab-seg">
+          <button class="tab-btn active"><span class="tab-dot"></span>Live Preview</button>
+          <button class="tab-btn">Output JSON</button>
         </div>
-        <span class="preview-url">file:///Users/ram/Documents/sample.html</span>
+        <div class="tab-url">file:///Users/ram/Documents/sample.html</div>
       </div>
-      <div class="web-area">
-        <div class="html-preview">
-          <h1>Employee Registration</h1>
-          <fieldset>
-            <legend>Personal Information</legend>
-            <div class="row"><label>First Name:</label><input type="text" value="John"></div>
-            <div class="row"><label>Last Name:</label><input type="text" value="Doe"></div>
-            <div class="row"><label>Email:</label><input type="email" value="john@example.com"></div>
-            <div class="row"><label>Birth Date:</label><input type="text" value="1990-05-12"></div>
-          </fieldset>
-          <fieldset>
-            <legend>Employment Details</legend>
-            <div class="row"><label>Department:</label>
-              <select><option>Engineering</option><option>Marketing</option></select>
+
+      <!-- Preview -->
+      <div class="preview-area">
+        <div class="html-card">
+          <div class="html-card-header">
+            <h1>Employee Registration</h1>
+            <p>Fill in the details below to register a new employee</p>
+          </div>
+          <div class="html-card-body">
+            <div class="form-section">
+              <div class="form-section-title">Personal Information</div>
+              <div class="form-row"><label>First Name</label><input type="text" value="John"></div>
+              <div class="form-row"><label>Last Name</label><input type="text" value="Doe"></div>
+              <div class="form-row"><label>Email</label><input type="email" value="john@example.com"></div>
+              <div class="form-row"><label>Birth Date</label><input type="text" value="1990-05-12"></div>
             </div>
-            <div class="row"><label>Role / Title:</label><input type="text" value="Software Engineer"></div>
-            <div class="row"><label>Start Date:</label><input type="text" value="2024-01-15"></div>
-          </fieldset>
-          <div class="actions">
-            <button class="pbtn cancel">Cancel</button>
-            <button class="pbtn submit">Register Employee</button>
+            <div class="form-section">
+              <div class="form-section-title">Employment Details</div>
+              <div class="form-row">
+                <label>Department</label>
+                <select><option>Engineering</option><option>Marketing</option></select>
+              </div>
+              <div class="form-row"><label>Role / Title</label><input type="text" value="Software Engineer"></div>
+              <div class="form-row"><label>Start Date</label><input type="text" value="2024-01-15"></div>
+            </div>
+            <div class="form-actions">
+              <button class="btn-cancel">Cancel</button>
+              <button class="btn-submit">Register Employee</button>
+            </div>
           </div>
         </div>
       </div>
-    </div>
 
-  </div>
+    </div><!-- /main -->
+
+  </div><!-- /body -->
 
   <!-- Status bar -->
   <div class="statusbar">
-    <div class="status-item ok">
-      <div class="status-dot"></div>
-      ✓ Form written to Sources/Forms/employeeReg/form.4dform
+    <div class="st-item ok">
+      <div class="st-dot green"></div>
+      ✓ form.4dform written to Sources/Forms/employeeReg/
     </div>
-    <div class="status-sep"></div>
-    <div class="status-item">gpt-4o · 1 247 tokens</div>
-    <div class="status-sep"></div>
-    <div class="status-item">4D v21 · Project Mode</div>
+    <div class="st-sep"></div>
+    <div class="st-item">gpt-4o · 1 247 tokens</div>
+    <div class="st-sep"></div>
+    <div class="st-item st-right">4D v21 · Project Mode</div>
   </div>
 
 </div>
